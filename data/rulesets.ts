@@ -489,7 +489,7 @@ export const Rulesets: {[k: string]: FormatData} = {
 			this.add('rule', 'Species Clause: Limit one of each Pokémon');
 		},
 		onValidateTeam(team, format) {
-			const speciesTable = new Set<number>();
+			const speciesTable: Set<number> = new Set();
 			for (const set of team) {
 				const species = this.dex.species.get(set.species);
 				if (speciesTable.has(species.num)) {
@@ -504,7 +504,7 @@ export const Rulesets: {[k: string]: FormatData} = {
 		name: 'Nickname Clause',
 		desc: "Prevents teams from having more than one Pok&eacute;mon with the same nickname",
 		onValidateTeam(team, format) {
-			const nameTable = new Set<string>();
+			const nameTable: Set<string> = new Set();
 			for (const set of team) {
 				const name = set.name;
 				if (name) {
@@ -527,7 +527,7 @@ export const Rulesets: {[k: string]: FormatData} = {
 			this.add('rule', 'Item Clause: Limit one of each item');
 		},
 		onValidateTeam(team) {
-			const itemTable = new Set<string>();
+			const itemTable: Set<string> = new Set();
 			for (const set of team) {
 				const item = this.toID(set.item);
 				if (!item) continue;
@@ -1071,45 +1071,35 @@ export const Rulesets: {[k: string]: FormatData} = {
 		checkCanLearn(move, species, setSources, set) {
 			const nonstandard = move.isNonstandard === 'Past' && !this.ruleTable.has('standardnatdex');
 			if (!nonstandard && !move.isZ && !move.isMax && !this.ruleTable.isRestricted(`move:${move.id}`)) {
-				const speciesTypes: string[] = [];
-				const moveTypes: string[] = [];
-				for (let i = this.dex.gen; i >= species.gen && i >= move.gen; i--) {
-					const dex = this.dex.forGen(i);
-					moveTypes.push(dex.moves.get(move.name).type);
-
-					const pokemon = dex.species.get(species.name);
-					if (pokemon.forme || pokemon.otherFormes) {
-						const baseSpecies = dex.species.get(pokemon.baseSpecies);
-						const originalForme = dex.species.get(pokemon.changesFrom || pokemon.name);
-						speciesTypes.push(...originalForme.types);
-						if (baseSpecies.otherFormes) {
-							for (const formeName of baseSpecies.otherFormes) {
-								if (baseSpecies.prevo) {
-									const prevo = dex.species.get(baseSpecies.prevo);
-									if (prevo.evos.includes(formeName)) continue;
-								}
-								const forme = dex.species.get(formeName);
-								if (
-									forme.changesFrom === originalForme.name && !forme.battleOnly &&
-									// Temporary workaround
-									forme.forme !== 'Crowned'
-								) {
-									speciesTypes.push(...forme.types);
-								}
+				const dex = this.dex;
+				let types: string[];
+				if (species.forme || species.otherFormes) {
+					const baseSpecies = dex.species.get(species.baseSpecies);
+					const originalForme = dex.species.get(species.changesFrom || species.name);
+					types = originalForme.types;
+					if (baseSpecies.otherFormes) {
+						for (const formeName of baseSpecies.otherFormes) {
+							if (baseSpecies.prevo) {
+								const prevo = dex.species.get(baseSpecies.prevo);
+								if (prevo.evos.includes(formeName)) continue;
+							}
+							const forme = dex.species.get(formeName);
+							if (forme.changesFrom === originalForme.name && !forme.battleOnly) {
+								types = types.concat(forme.types);
 							}
 						}
-					} else {
-						speciesTypes.push(...pokemon.types);
 					}
-
-					let prevo = pokemon.prevo;
-					while (prevo) {
-						const prevoSpecies = dex.species.get(prevo);
-						speciesTypes.push(...prevoSpecies.types);
-						prevo = prevoSpecies.prevo;
-					}
+				} else {
+					types = species.types;
 				}
-				if (moveTypes.some(m => speciesTypes.includes(m))) return null;
+
+				let prevo = species.prevo;
+				while (prevo) {
+					const prevoSpecies = dex.species.get(prevo);
+					types = types.concat(prevoSpecies.types);
+					prevo = prevoSpecies.prevo;
+				}
+				if (types.includes(move.type)) return null;
 			}
 			return this.checkCanLearn(move, species, setSources, set);
 		},
@@ -1121,15 +1111,14 @@ export const Rulesets: {[k: string]: FormatData} = {
 		checkCanLearn(move, species, setSources, set) {
 			const nonstandard = move.isNonstandard === 'Past' && !this.ruleTable.has('standardnatdex');
 			if (!nonstandard && !move.isZ && !move.isMax && !this.ruleTable.isRestricted(`move:${move.id}`)) {
-				const letters = [species.id.charAt(0)];
+				const letters = [species.id[0]];
 				let prevo = species.prevo;
-				if (species.changesFrom === 'Silvally') prevo = 'Type: Null';
 				while (prevo) {
 					const prevoSpecies = this.dex.species.get(prevo);
-					letters.push(prevoSpecies.id.charAt(0));
+					letters.push(prevoSpecies.id[0]);
 					prevo = prevoSpecies.prevo;
 				}
-				if (letters.includes(move.id.charAt(0))) return null;
+				if (letters.includes(move.id[0])) return null;
 			}
 			return this.checkCanLearn(move, species, setSources, set);
 		},
@@ -1172,7 +1161,7 @@ export const Rulesets: {[k: string]: FormatData} = {
 	allowavs: {
 		effectType: 'ValidatorRule',
 		name: 'Allow AVs',
-		desc: "Tells formats with the 'gen7letsgo' mod to take Awakening Values into consideration when calculating stats",
+		desc: "Tells formats with the 'letsgo' mod to take Awakening Values into consideration when calculating stats",
 		// implemented in TeamValidator#validateStats
 	},
 	nfeclause: {
@@ -1207,7 +1196,7 @@ export const Rulesets: {[k: string]: FormatData} = {
 			this.add('rule', 'Forme Clause: Limit one of each forme of a Pokémon');
 		},
 		onValidateTeam(team) {
-			const formeTable = new Set<string>();
+			const formeTable: Set<string> = new Set();
 			for (const set of team) {
 				let species = this.dex.species.get(set.species);
 				if (species.name !== species.baseSpecies) {
@@ -1566,40 +1555,6 @@ export const Rulesets: {[k: string]: FormatData} = {
 			// so all HP-related properties get re-initialized in setSpecies
 			pokemon.maxhp = 0;
 			pokemon.setSpecies(newSpecies, null);
-		},
-	},
-	bonustyperule: {
-		name: "Bonus Type Rule",
-		effectType: "Rule",
-		desc: `Pok&eacute;mon can be nicknamed the name of a type to have that type added onto their current ones.`,
-		onBegin() {
-			this.add('rule', 'Bonus Type Rule: Pok\u00e9mon can be nicknamed the name of a type to have that type added onto their current ones.');
-		},
-		onModifySpeciesPriority: 1,
-		onModifySpecies(species, target, source, effect) {
-			if (!target) return; // Chat command
-			if (effect && ['imposter', 'transform'].includes(effect.id)) return;
-			const typesSet = new Set(species.types);
-			const bonusType = this.dex.types.get(target.set.name);
-			if (bonusType.exists) typesSet.add(bonusType.name);
-			return {...species, types: [...typesSet]};
-		},
-		onSwitchIn(pokemon) {
-			this.add('-start', pokemon, 'typechange', (pokemon.illusion || pokemon).getTypes(true).join('/'), '[silent]');
-		},
-		onAfterMega(pokemon) {
-			this.add('-start', pokemon, 'typechange', (pokemon.illusion || pokemon).getTypes(true).join('/'), '[silent]');
-		},
-	},
-	firstbloodrule: {
-		effectType: "Rule",
-		name: "First Blood Rule",
-		desc: `The first team to have a Pok&eacute;mon faint loses.`,
-		onBegin() {
-			this.add('rule', 'First Blood Rule: The first team to have a Pok\u00e9mon faint loses.');
-		},
-		onFaint(target) {
-			this.lose(target.side);
 		},
 	},
 };
