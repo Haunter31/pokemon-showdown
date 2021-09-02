@@ -1791,7 +1791,7 @@ export const Pokedex: {[speciesid: string]: SpeciesData} = {
 		baseSpecies: "Rapidash",
 		forme: "Galar",
 		types: ["Psychic", "Fairy"],
-		baseStats: {hp: 65, atk: 70, def: 70, spa:121, spd: 70, spe: 109},
+		baseStats: {hp: 65, atk: 70, def: 70, spa: 121, spd: 70, spe: 109},
 		abilities: {0: "Run Away", 1: "Pastel Veil", H: "Magic Guard"},
 		heightm: 1.7,
 		weightkg: 80,
