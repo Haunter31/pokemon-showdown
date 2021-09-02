@@ -351,6 +351,21 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 		num: 201,
 	},
 	bigpecks: {
+		onBoost(boost, target, source) {
+			if (boost.def && boost.def < 0) {
+				delete boost.def;
+				if (!(effect as ActiveMove).secondaries && effect.id !== 'octolock') {
+					this.add("-fail", target, "unboost", "Defense", "[from] ability: Big Pecks", "[of] " + target);
+				}
+			}
+		},
+		isBreakable: true,
+		name: "Big Pecks",
+		rating: 0.5,
+		num: 145,
+	},
+	/*
+	bigpecks: {
 		onBoost(boost, target, source, effect) {
 			if (source && target === source) return;
 			if (boost.def && boost.def < 0) {
@@ -365,6 +380,38 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 		rating: 0.5,
 		num: 145,
 	},
+		thickfat: {
+		onSourceModifyAtkPriority: 6,
+		onSourceModifyAtk(atk, attacker, defender, move) {
+			if (move.type === 'Ice' || move.type === 'Fire') {
+				this.debug('Thick Fat weaken');
+				return this.chainModify(0.5);
+			}
+		},
+		onSourceModifySpAPriority: 5,
+		onSourceModifySpA(atk, attacker, defender, move) {
+			if (move.type === 'Ice' || move.type === 'Fire') {
+				this.debug('Thick Fat weaken');
+				return this.chainModify(0.5);
+			}
+		},
+		isBreakable: true,
+		name: "Thick Fat",
+		rating: 3.5,
+		num: 47,
+	},
+	clearbody: {
+		inherit: true,
+		onBoost(boost, target, source) {
+			let i: BoostID;
+			for (i in boost) {
+				if (boost[i]! < 0) {
+					delete boost[i];
+					this.add("-message", target.name + "'s stats were not lowered! (placeholder)");
+				}
+			}
+		},
+	*/
 	blaze: {
 		onModifyAtkPriority: 5,
 		onModifyAtk(atk, attacker, defender, move) {

@@ -57698,6 +57698,8 @@ export const Learnsets: {[speciesid: string]: LearnsetData} = {
 			toxic: ["8L1", "7M", "6M", "5M"],
 			uturn: ["8M", "7M", "6M", "5M"],
 			whirlwind: ["8L36", "7L1", "6L1", "5L57"],
+
+			closecombat: ["8L1"],
 		},
 		eventData: [
 			{generation: 5, level: 25, gender: "F", isHidden: true, moves: ["pluck", "nastyplot", "flatter", "feintattack"]},

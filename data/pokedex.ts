@@ -33,7 +33,7 @@ export const Pokedex: {[speciesid: string]: SpeciesData} = {
 		types: ["Grass", "Poison"],
 		genderRatio: {M: 0.875, F: 0.125},
 		//baseStats: {hp: 80, atk: 82, def: 83, spa: 100, spd: 100, spe: 80},
-		baseStats: {hp: 85, atk: 87, def: 83, spa: 100, spd: 100, spe: 80},
+		baseStats: {hp: 85, atk: 700, def: 83, spa: 100, spd: 100, spe: 80},
 		abilities: {0: "Overgrow", H: "Chlorophyll"},
 		heightm: 2,
 		weightkg: 100,

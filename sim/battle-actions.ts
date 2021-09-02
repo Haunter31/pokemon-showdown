@@ -1542,7 +1542,7 @@ export class BattleActions {
 			if (this.battle.gen === 6) {
 				critMult = [0, 16, 8, 2, 1];
 			} else {
-				critMult = [0, 24, 8, 2, 1];
+				critMult = [0, 100, 4, 2, 1];
 			}
 		}
 
@@ -1666,7 +1666,7 @@ export class BattleActions {
 		// crit - not a modifier
 		const isCrit = target.getMoveHitData(move).crit;
 		if (isCrit) {
-			baseDamage = tr(baseDamage * (move.critModifier || (this.battle.gen >= 6 ? 1.5 : 2)));
+			baseDamage = tr(baseDamage * (move.critModifier || (this.battle.gen >= 6 ? 1.75 : 2)));
 		}
 
 		// random factor - also not a modifier
@@ -1701,7 +1701,7 @@ export class BattleActions {
 
 		if (isCrit && !suppressMessages) this.battle.add('-crit', target);
 
-		if (pokemon.status === 'brn' && move.category === 'Physical' && !pokemon.hasAbility('guts')) {
+		if (pokemon.status === 'brn' && move.category === 'Physical' && !pokemon.hasAbility('guts') || !pokemon.hasAbility('quickfeet')) {
 			if (this.battle.gen < 6 || move.id !== 'facade') {
 				baseDamage = this.battle.modify(baseDamage, 0.5);
 			}
