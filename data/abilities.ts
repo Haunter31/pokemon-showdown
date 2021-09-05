@@ -571,12 +571,18 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 		rating: 2.5,
 		num: 172,
 	},
+	//updated
 	compoundeyes: {
-		onSourceModifyAccuracyPriority: -1,
+	/*	onSourceModifyAccuracyPriority: -1,
 		onSourceModifyAccuracy(accuracy) {
 			if (typeof accuracy !== 'number') return;
 			this.debug('compoundeyes - enhancing accuracy');
 			return this.chainModify([5325, 4096]);
+		},*/
+		onModifyMove(move) {
+			if (typeof move.accuracy !== 'number') return;
+			this.debug('compoundeyes - enhancing accuracy');
+			move.accuracy *= 1.6;
 		},
 		name: "Compound Eyes",
 		rating: 3,
@@ -653,6 +659,7 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 		rating: 0.5,
 		num: 56,
 	},
+	//updated
 	damp: {
 		onAnyTryMove(target, source, effect) {
 			if (['explosion', 'mindblown', 'mistyexplosion', 'selfdestruct'].includes(effect.id)) {
@@ -664,6 +671,28 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 		onAnyDamage(damage, target, source, effect) {
 			if (effect && effect.id === 'aftermath') {
 				return false;
+			}
+		},
+		onSourceModifyAtkPriority: 5,
+		onSourceModifyAtk(atk, attacker, defender, move) {
+			if (move.type === 'Fire') {
+				return this.chainModify(0.5);
+			}
+		},
+		onSourceModifySpAPriority: 5,
+		onSourceModifySpA(atk, attacker, defender, move) {
+			if (move.type === 'Fire') {
+				return this.chainModify(0.5);
+			}
+		},
+		onModifyAtk(atk, attacker, defender, move) {
+			if (move.type === 'Water') {
+				return this.chainModify(2);
+			}
+		},
+		onModifySpA(atk, attacker, defender, move) {
+			if (move.type === 'Water') {
+				return this.chainModify(2);
 			}
 		},
 		isBreakable: true,
@@ -721,16 +750,17 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 		rating: 2.5,
 		num: 219,
 	},
+	//updated
 	defeatist: {
 		onModifyAtkPriority: 5,
 		onModifyAtk(atk, pokemon) {
-			if (pokemon.hp <= pokemon.maxhp / 2) {
+			if (pokemon.hp <= pokemon.maxhp / 4) {
 				return this.chainModify(0.5);
 			}
 		},
 		onModifySpAPriority: 5,
 		onModifySpA(atk, pokemon) {
-			if (pokemon.hp <= pokemon.maxhp / 2) {
+			if (pokemon.hp <= pokemon.maxhp / 4) {
 				return this.chainModify(0.5);
 			}
 		},
@@ -1033,9 +1063,22 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 		num: 49,
 	},
 	flareboost: {
-		onBasePowerPriority: 19,
+	/*	onBasePowerPriority: 19,
 		onBasePower(basePower, attacker, defender, move) {
 			if (attacker.status === 'brn' && move.category === 'Special') {
+				return this.chainModify(1.5);
+			}
+		},
+		*/
+		onModifyAtkPriority: 5,
+		onModifyAtk(atk, pokemon) {
+			if (pokemon.status) {
+				return this.chainModify(1.0);
+			}
+		},
+		onModifySpAPriority: 5,
+		onModifySpA(spa, pokemon) {
+			if (pokemon.status) {
 				return this.chainModify(1.5);
 			}
 		},
@@ -1280,9 +1323,10 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 		rating: 4,
 		num: 169,
 	},
+	//Updated
 	galewings: {
 		onModifyPriority(priority, pokemon, target, move) {
-			if (move?.type === 'Flying' && pokemon.hp === pokemon.maxhp) return priority + 1;
+			if (move?.type === 'Flying' && pokemon.hp >= pokemon.maxhp / 2) return priority + 1;
 		},
 		name: "Gale Wings",
 		rating: 3,
@@ -1365,10 +1409,11 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 		rating: 4.5,
 		num: 255,
 	},
+	//Updated
 	grasspelt: {
 		onModifyDefPriority: 6,
 		onModifyDef(pokemon) {
-			if (this.field.isTerrain('grassyterrain')) return this.chainModify(1.5);
+			if (this.field.isTerrain('grassyterrain')) return this.chainModify(2.0);
 		},
 		isBreakable: true,
 		name: "Grass Pelt",
@@ -1463,8 +1508,13 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 		rating: 0,
 		num: 131,
 	},
+	//updated
 	heatproof: {
-		onSourceBasePowerPriority: 18,
+		onImmunity(type, pokemon) {
+			if (type === 'Fire' || type === 'brn') return false;
+		},
+	},
+/*		onSourceBasePowerPriority: 18,
 		onSourceBasePower(basePower, attacker, defender, move) {
 			if (move.type === 'Fire') {
 				return this.chainModify(0.5);
@@ -1474,13 +1524,28 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 			if (effect && effect.id === 'brn') {
 				return damage / 2;
 			}
-		},
+		},*/
 		isBreakable: true,
 		name: "Heatproof",
 		rating: 2,
 		num: 85,
 	},
+	//Updated
 	heavymetal: {
+		onSourceModifyAtkPriority: 6,
+		onSourceModifyAtk(atk, attacker, defender, move) {
+			if (move.type === 'Ground') {
+				this.debug('Heavy Metal weaken');
+				return this.chainModify(0.5);
+			}
+		},
+		onSourceModifySpAPriority: 5,
+		onSourceModifySpA(atk, attacker, defender, move) {
+			if (move.type === 'Ground') {
+				this.debug('Heavy Metal weaken');
+				return this.chainModify(0.5);
+			}
+		},
 		onModifyWeightPriority: 1,
 		onModifyWeight(weighthg) {
 			return weighthg * 2;
@@ -1531,6 +1596,7 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 		rating: 3.5,
 		num: 55,
 	},
+	//updated
 	hydration: {
 		onResidualOrder: 5,
 		onResidualSubOrder: 3,
@@ -1539,6 +1605,12 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 				this.debug('hydration');
 				this.add('-activate', pokemon, 'ability: Hydration');
 				pokemon.cureStatus();
+			}
+		},
+		onWeather(target, source, effect) {
+			if (target.hasItem('utilityumbrella')) return;
+			if (effect.id === 'raindance' || effect.id === 'primordialsea') {
+				this.heal(target.baseMaxhp / 16);
 			}
 		},
 		name: "Hydration",
@@ -1563,7 +1635,7 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 	icebody: {
 		onWeather(target, source, effect) {
 			if (effect.id === 'hail') {
-				this.heal(target.baseMaxhp / 16);
+				this.heal(target.baseMaxhp / 8);
 			}
 		},
 		onImmunity(type, pokemon) {
@@ -1831,8 +1903,9 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 		rating: 2.5,
 		num: 154,
 	},
+	//Updated
 	keeneye: {
-		onBoost(boost, target, source, effect) {
+/*		onBoost(boost, target, source, effect) {
 			if (source && target === source) return;
 			if (boost.accuracy && boost.accuracy < 0) {
 				delete boost.accuracy;
@@ -1843,6 +1916,11 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 		},
 		onModifyMove(move) {
 			move.ignoreEvasion = true;
+		},*/
+		onModifyMove(move) {
+			if (typeof move.accuracy !== 'number') return;
+			this.debug('keeneye - enhancing accuracy');
+			move.accuracy *= 1.6;
 		},
 		isBreakable: true,
 		name: "Keen Eye",
@@ -1855,6 +1933,7 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 		rating: -1,
 		num: 103,
 	},
+	//updated
 	leafguard: {
 		onSetStatus(status, target, source, effect) {
 			if (['sunnyday', 'desolateland'].includes(target.effectiveWeather())) {
@@ -1868,6 +1947,12 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 			if (status.id === 'yawn' && ['sunnyday', 'desolateland'].includes(target.effectiveWeather())) {
 				this.add('-immune', target, '[from] ability: Leaf Guard');
 				return null;
+			}
+		},
+		onWeather(target, source, effect) {
+			if (target.hasItem('utilityumbrella')) return;
+			if (effect.id === 'sunnyday' || effect.id === 'desolateland') {
+				this.heal(target.baseMaxhp / 16);
 			}
 		},
 		isBreakable: true,
@@ -1895,7 +1980,22 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 		rating: 4.5,
 		num: 236,
 	},
+	//updated
 	lightmetal: {
+		onSourceModifyAtkPriority: 6,
+		onSourceModifyAtk(atk, attacker, defender, move) {
+			if (move.type === 'Ground') {
+				this.debug('Heavy Metal weaken');
+				return this.chainModify(0.5);
+			}
+		},
+		onSourceModifySpAPriority: 5,
+		onSourceModifySpA(atk, attacker, defender, move) {
+			if (move.type === 'Ground') {
+				this.debug('Heavy Metal weaken');
+				return this.chainModify(0.5);
+			}
+		},
 		onModifyWeight(weighthg) {
 			return this.trunc(weighthg / 2);
 		},
@@ -2958,15 +3058,22 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 				return this.chainModify(1.5);
 			}
 		},
+		onModifyAtkPriority: 5,
+		onModifyAtk(atk, pokemon) {
+			if (pokemon.status) {
+				return this.chainModify(1.0);
+			}
+		},
 		name: "Quick Feet",
 		rating: 2.5,
 		num: 95,
 	},
+	//updated
 	raindish: {
 		onWeather(target, source, effect) {
 			if (target.hasItem('utilityumbrella')) return;
 			if (effect.id === 'raindance' || effect.id === 'primordialsea') {
-				this.heal(target.baseMaxhp / 16);
+				this.heal(target.baseMaxhp / 8);
 			}
 		},
 		name: "Rain Dish",
@@ -3080,6 +3187,7 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 		rating: 2,
 		num: 247,
 	},
+	//Updated
 	rivalry: {
 		onBasePowerPriority: 24,
 		onBasePower(basePower, attacker, defender, move) {
@@ -3089,7 +3197,7 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 					return this.chainModify(1.25);
 				} else {
 					this.debug('Rivalry weaken');
-					return this.chainModify(0.75);
+					return this.chainModify(0.90);
 				}
 			}
 		},
@@ -3104,12 +3212,16 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 		rating: 4,
 		num: 225,
 	},
+	//updated
 	rockhead: {
-		onDamage(damage, target, source, effect) {
+/*		onDamage(damage, target, source, effect) {
 			if (effect.id === 'recoil') {
 				if (!this.activeMove) throw new Error("Battle.activeMove is null");
 				if (this.activeMove.id !== 'struggle') return null;
 			}
+		},*/
+		onDamage(damage, target, source, effect) {
+			if (effect && ['lifeorb', 'recoil'].includes(effect.id)) return false;
 		},
 		name: "Rock Head",
 		rating: 3,
@@ -3452,6 +3564,7 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 		rating: 3,
 		num: 92,
 	},
+	//update
 	slowstart: {
 		onStart(pokemon) {
 			pokemon.addVolatile('slowstart');
@@ -3461,7 +3574,7 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 			this.add('-end', pokemon, 'Slow Start', '[silent]');
 		},
 		condition: {
-			duration: 5,
+			duration: 3,
 			onResidualOrder: 28,
 			onResidualSubOrder: 2,
 			onStart(target) {
@@ -3499,6 +3612,9 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 				return this.chainModify(1.5);
 			}
 		},
+		onModifyCritRatio(critRatio) {
+			return critRatio + 1;
+		},
 		name: "Sniper",
 		rating: 2,
 		num: 97,
@@ -3528,7 +3644,14 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 		rating: 4,
 		num: 117,
 	},
+	//updated
 	solarpower: {
+		onModifyAtkPriority: 6,
+		onModifyAtk(atk, pokemon) {
+			if (['sunnyday', 'desolateland'].includes(pokemon.effectiveWeather())) {
+				return this.chainModify(1.5);
+			}
+		},
 		onModifySpAPriority: 5,
 		onModifySpA(spa, pokemon) {
 			if (['sunnyday', 'desolateland'].includes(pokemon.effectiveWeather())) {
@@ -3813,7 +3936,7 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 	},
 	superluck: {
 		onModifyCritRatio(critRatio) {
-			return critRatio + 1;
+			return critRatio + 2;
 		},
 		name: "Super Luck",
 		rating: 1.5,
@@ -4328,12 +4451,21 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 		rating: 4.5,
 		num: 199,
 	},
+	//updated
 	watercompaction: {
-		onDamagingHit(damage, target, source, move) {
+		onTryHit(target, source, move) {
+			if (target !== source && move.type === 'Water') {
+				if (!this.boost({def: 2})) {
+					this.add('-immune', target, '[from] ability: Water Compaction');
+				}
+				return null;
+			}
+		},
+	/*	onDamagingHit(damage, target, source, move) {
 			if (move.type === 'Water') {
 				this.boost({def: 2});
 			}
-		},
+		},*/
 		name: "Water Compaction",
 		rating: 1.5,
 		num: 195,
