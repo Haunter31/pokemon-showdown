@@ -1532,20 +1532,6 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 	},
 	//Updated
 	heavymetal: {
-		onSourceModifyAtkPriority: 6,
-		onSourceModifyAtk(atk, attacker, defender, move) {
-			if (move.type === 'Ground') {
-				this.debug('Heavy Metal weaken');
-				return this.chainModify(0.5);
-			}
-		},
-		onSourceModifySpAPriority: 5,
-		onSourceModifySpA(atk, attacker, defender, move) {
-			if (move.type === 'Ground') {
-				this.debug('Heavy Metal weaken');
-				return this.chainModify(0.5);
-			}
-		},
 		onModifyWeightPriority: 1,
 		onModifyWeight(weighthg) {
 			return weighthg * 2;

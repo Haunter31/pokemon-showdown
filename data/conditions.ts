@@ -55,12 +55,12 @@ export const Conditions: {[k: string]: ConditionData} = {
 			this.effectState.startTime = this.random(2, 5);
 			this.effectState.time = this.effectState.startTime;
 		},
-		//updated?
+		//	updated?
 		onBeforeMovePriority: 10,
 		onBeforeMove(pokemon, target, move) {
 			if (pokemon.hasAbility('earlybird')) {
-				//pokemon.statusState.time--;
-				pokemon.statusState.time === 0;
+			pokemon.statusState.time--;
+			//	pokemon.statusState.time === 0;
 			}
 			pokemon.statusState.time--;
 			if (pokemon.statusState.time <= 0) {
@@ -643,7 +643,7 @@ export const Conditions: {[k: string]: ConditionData} = {
 			}
 			return 5;
 		},
-		//updated
+		// updated
 		onModifyDefPriority: 10,
 		onModifyDef(def, pokemon) {
 			if (pokemon.hasType('Ice') && this.field.isWeather('hail')) {
