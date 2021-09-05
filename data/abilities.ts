@@ -1513,7 +1513,6 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 		onImmunity(type, pokemon) {
 			if (type === 'Fire' || type === 'brn') return false;
 		},
-	},
 /*		onSourceBasePowerPriority: 18,
 		onSourceBasePower(basePower, attacker, defender, move) {
 			if (move.type === 'Fire') {
@@ -1532,14 +1531,27 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 	},
 	// Updated
 	heavymetal: {
-		onModifyWeightPriority: 1,
+		onSourceModifyAtkPriority: 6,
+		onSourceModifyAtk(atk, attacker, defender, move) {
+			if (move.type === 'Ground') {
+				this.debug('Heavy Metal weaken');
+				return this.chainModify(0.5);
+			}
+		},
+		onSourceModifySpAPriority: 5,
+		onSourceModifySpA(atk, attacker, defender, move) {
+			if (move.type === 'Ground') {
+				this.debug('Heavy Metal weaken');
+				return this.chainModify(0.5);
+			}
+		},
 		onModifyWeight(weighthg) {
-			return weighthg * 2;
+			return this.trunc(weighthg * 2);
 		},
 		isBreakable: true,
 		name: "Heavy Metal",
-		rating: 0,
-		num: 134,
+		rating: 1,
+		num: 135,
 	},
 	honeygather: {
 		name: "Honey Gather",
