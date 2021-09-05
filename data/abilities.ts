@@ -1513,7 +1513,7 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 		onImmunity(type, pokemon) {
 			if (type === 'Fire' || type === 'brn') return false;
 		},
-/*		onSourceBasePowerPriority: 18,
+/*	onSourceBasePowerPriority: 18,
 		onSourceBasePower(basePower, attacker, defender, move) {
 			if (move.type === 'Fire') {
 				return this.chainModify(0.5);
@@ -1903,7 +1903,7 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 	},
 	// Updated
 	keeneye: {
-/*		onBoost(boost, target, source, effect) {
+/*	onBoost(boost, target, source, effect) {
 			if (source && target === source) return;
 			if (boost.accuracy && boost.accuracy < 0) {
 				delete boost.accuracy;
@@ -3212,7 +3212,7 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 	},
 	// updated
 	rockhead: {
-/*		onDamage(damage, target, source, effect) {
+/*	onDamage(damage, target, source, effect) {
 			if (effect.id === 'recoil') {
 				if (!this.activeMove) throw new Error("Battle.activeMove is null");
 				if (this.activeMove.id !== 'struggle') return null;
@@ -3562,7 +3562,7 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 		rating: 3,
 		num: 92,
 	},
-	//update
+	// update
 	slowstart: {
 		onStart(pokemon) {
 			pokemon.addVolatile('slowstart');
@@ -4460,10 +4460,10 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 			}
 		},
 	/*	onDamagingHit(damage, target, source, move) {
-			if (move.type === 'Water') {
-				this.boost({def: 2});
-			}
-		},*/
+				if (move.type === 'Water') {
+					this.boost({def: 2});
+				}
+			},*/
 		name: "Water Compaction",
 		rating: 1.5,
 		num: 195,
