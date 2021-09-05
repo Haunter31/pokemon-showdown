@@ -1513,17 +1513,6 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 		onImmunity(type, pokemon) {
 			if (type === 'Fire' || type === 'brn') return false;
 		},
-//	onSourceBasePowerPriority: 18,
-//		onSourceBasePower(basePower, attacker, defender, move) {
-//			if (move.type === 'Fire') {
-//				return this.chainModify(0.5);
-//			}
-//		},
-//		onDamage(damage, target, source, effect) {
-//			if (effect && effect.id === 'brn') {
-//				return damage / 2;
-//			}
-//		},
 		isBreakable: true,
 		name: "Heatproof",
 		rating: 2,
@@ -1903,18 +1892,6 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 	},
 	// Updated
 	keeneye: {
-//	onBoost(boost, target, source, effect) {
-//			if (source && target === source) return;
-//			if (boost.accuracy && boost.accuracy < 0) {
-//				delete boost.accuracy;
-//				if (!(effect as ActiveMove).secondaries) {
-//					this.add("-fail", target, "unboost", "accuracy", "[from] ability: Keen Eye", "[of] " + target);
-//				}
-//			}
-//		},
-//		onModifyMove(move) {
-//			move.ignoreEvasion = true;
-//		}, */
 		onModifyMove(move) {
 			if (typeof move.accuracy !== 'number') return;
 			this.debug('keeneye - enhancing accuracy');
@@ -3212,12 +3189,6 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 	},
 	// updated
 	rockhead: {
-//	onDamage(damage, target, source, effect) {
-//			if (effect.id === 'recoil') {
-//				if (!this.activeMove) throw new Error("Battle.activeMove is null");
-//				if (this.activeMove.id !== 'struggle') return null;
-//			}
-//		},
 		onDamage(damage, target, source, effect) {
 			if (effect && ['lifeorb', 'recoil'].includes(effect.id)) return false;
 		},
@@ -4459,11 +4430,6 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 				return null;
 			}
 		},
-	//	onDamagingHit(damage, target, source, move) {
-	//			if (move.type === 'Water') {
-	//				this.boost({def: 2});
-	//			}
-	//		},
 		name: "Water Compaction",
 		rating: 1.5,
 		num: 195,
