@@ -571,7 +571,7 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 		rating: 2.5,
 		num: 172,
 	},
-	//updated
+	// updated
 	compoundeyes: {
 	/*	onSourceModifyAccuracyPriority: -1,
 		onSourceModifyAccuracy(accuracy) {
@@ -659,7 +659,7 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 		rating: 0.5,
 		num: 56,
 	},
-	//updated
+	// updated
 	damp: {
 		onAnyTryMove(target, source, effect) {
 			if (['explosion', 'mindblown', 'mistyexplosion', 'selfdestruct'].includes(effect.id)) {
@@ -750,7 +750,7 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 		rating: 2.5,
 		num: 219,
 	},
-	//updated
+	// updated
 	defeatist: {
 		onModifyAtkPriority: 5,
 		onModifyAtk(atk, pokemon) {
@@ -1323,7 +1323,7 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 		rating: 4,
 		num: 169,
 	},
-	//Updated
+	// Updated
 	galewings: {
 		onModifyPriority(priority, pokemon, target, move) {
 			if (move?.type === 'Flying' && pokemon.hp >= pokemon.maxhp / 2) return priority + 1;
@@ -1409,7 +1409,7 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 		rating: 4.5,
 		num: 255,
 	},
-	//Updated
+	// Updated
 	grasspelt: {
 		onModifyDefPriority: 6,
 		onModifyDef(pokemon) {
@@ -1508,7 +1508,7 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 		rating: 0,
 		num: 131,
 	},
-	//updated
+	// updated
 	heatproof: {
 		onImmunity(type, pokemon) {
 			if (type === 'Fire' || type === 'brn') return false;
@@ -1530,12 +1530,12 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 		rating: 2,
 		num: 85,
 	},
-	//Updated
+	// Updated
 	heavymetal: {
 		onModifyWeightPriority: 1,
 		onModifyWeight(weighthg) {
 			return weighthg * 2;
-		};
+		},
 		isBreakable: true,
 		name: "Heavy Metal",
 		rating: 0,
@@ -1582,7 +1582,7 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 		rating: 3.5,
 		num: 55,
 	},
-	//updated
+	// updated
 	hydration: {
 		onResidualOrder: 5,
 		onResidualSubOrder: 3,
@@ -1889,7 +1889,7 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 		rating: 2.5,
 		num: 154,
 	},
-	//Updated
+	// Updated
 	keeneye: {
 /*		onBoost(boost, target, source, effect) {
 			if (source && target === source) return;
@@ -1902,7 +1902,7 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 		},
 		onModifyMove(move) {
 			move.ignoreEvasion = true;
-		},*/
+		}, */
 		onModifyMove(move) {
 			if (typeof move.accuracy !== 'number') return;
 			this.debug('keeneye - enhancing accuracy');
@@ -1919,7 +1919,7 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 		rating: -1,
 		num: 103,
 	},
-	//updated
+	// updated
 	leafguard: {
 		onSetStatus(status, target, source, effect) {
 			if (['sunnyday', 'desolateland'].includes(target.effectiveWeather())) {
@@ -1966,7 +1966,7 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 		rating: 4.5,
 		num: 236,
 	},
-	//updated
+	// updated
 	lightmetal: {
 		onSourceModifyAtkPriority: 6,
 		onSourceModifyAtk(atk, attacker, defender, move) {
@@ -3054,7 +3054,7 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 		rating: 2.5,
 		num: 95,
 	},
-	//updated
+	// updated
 	raindish: {
 		onWeather(target, source, effect) {
 			if (target.hasItem('utilityumbrella')) return;
@@ -3173,7 +3173,7 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 		rating: 2,
 		num: 247,
 	},
-	//Updated
+	// Updated
 	rivalry: {
 		onBasePowerPriority: 24,
 		onBasePower(basePower, attacker, defender, move) {
@@ -3198,7 +3198,7 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 		rating: 4,
 		num: 225,
 	},
-	//updated
+	// updated
 	rockhead: {
 /*		onDamage(damage, target, source, effect) {
 			if (effect.id === 'recoil') {
@@ -3630,7 +3630,7 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 		rating: 4,
 		num: 117,
 	},
-	//updated
+	// updated
 	solarpower: {
 		onModifyAtkPriority: 6,
 		onModifyAtk(atk, pokemon) {
@@ -4437,7 +4437,7 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 		rating: 4.5,
 		num: 199,
 	},
-	//updated
+	// updated
 	watercompaction: {
 		onTryHit(target, source, move) {
 			if (target !== source && move.type === 'Water') {
