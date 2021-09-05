@@ -1535,7 +1535,7 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 		onModifyWeightPriority: 1,
 		onModifyWeight(weighthg) {
 			return weighthg * 2;
-		},
+		};
 		isBreakable: true,
 		name: "Heavy Metal",
 		rating: 0,
