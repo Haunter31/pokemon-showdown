@@ -6490,7 +6490,7 @@ export const Pokedex: {[speciesid: string]: SpeciesData} = {
 		heightm: 0.6,
 		weightkg: 8.7,
 		color: "Pink",
-		evos: ["Alomomola"]
+		evos: ["Alomomola"],
 		eggGroups: ["Water 2"],
 	},
 	bagon: {
