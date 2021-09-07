@@ -8985,7 +8985,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		flags: {protect: 1, mirror: 1},
 		onHit(pokemon, source) {
 			const item = pokemon.getItem();
-		//	if ((item.isBerry || item.isGem) && pokemon.takeItem(source)) {
+				/// if ((item.isBerry || item.isGem) && pokemon.takeItem(source)) {
 				if (item) {
 				this.add('-enditem', pokemon, item.name, '[from] move: Incinerate');
 			}
@@ -16894,12 +16894,10 @@ export const Moves: {[moveid: string]: MoveData} = {
 		name: "Stockpile",
 		pp: 20,
 		priority: 0,
-		flags: {snatch: 1, heal: 1, bypasssub: 1, allyanim: 1},
+		flags: {snatch: 1, heal: 1},
+		heal: [1, 4],
 		onTry(source) {
 			if (source.volatiles['stockpile'] && source.volatiles['stockpile'].layers >= 3) return false;
-		},
-		onHit(pokemon) {
-			const success = !!this.heal(this.modify(pokemon.maxhp, 0.25));
 		},
 		volatileStatus: 'stockpile',
 		condition: {
