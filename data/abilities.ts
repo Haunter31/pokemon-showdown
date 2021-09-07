@@ -4598,8 +4598,6 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 		rating: 2.5,
 		num: 300,
 	},
-	
-
 	// CAP
 	mountaineer: {
 		onDamage(damage, target, source, effect) {
