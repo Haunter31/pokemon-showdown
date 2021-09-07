@@ -3888,7 +3888,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		flags: {contact: 1, protect: 1, mirror: 1},
 		multihit: 2,
 		secondary: {
-			chance: 50,
+			chance: 25,
 			boosts: {
 				def: -1,
 			},
@@ -9177,7 +9177,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 	},
 	irontail: {
 		num: 231,
-		accuracy: 75,
+		accuracy: 80,
 		basePower: 100,
 		category: "Physical",
 		name: "Iron Tail",
@@ -12140,7 +12140,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 			chance: 100,
 			boosts: {
 				evasion: -2,
-				spd: -2,
+				spe: -2,
 			},
 		},
 		target: "normal",

@@ -573,16 +573,11 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 	},
 	// updated
 	compoundeyes: {
-	/*	onSourceModifyAccuracyPriority: -1,
+		onSourceModifyAccuracyPriority: -1,
 		onSourceModifyAccuracy(accuracy) {
 			if (typeof accuracy !== 'number') return;
 			this.debug('compoundeyes - enhancing accuracy');
-			return this.chainModify([5325, 4096]);
-		},*/
-		onModifyMove(move) {
-			if (typeof move.accuracy !== 'number') return;
-			this.debug('compoundeyes - enhancing accuracy');
-			move.accuracy *= 1.6;
+			return this.chainModify([6554, 4096]);
 		},
 		name: "Compound Eyes",
 		rating: 3,
@@ -1868,16 +1863,26 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 		rating: 2.5,
 		num: 160,
 	},
+	// updated
 	ironfist: {
 		onBasePowerPriority: 23,
 		onBasePower(basePower, attacker, defender, move) {
 			if (move.flags['punch']) {
 				this.debug('Iron Fist boost');
-				return this.chainModify([4915, 4096]);
+				// return this.chainModify([4915, 4096]);
+				return this.chainModify([5325, 4096]);
+			}
+		},
+		onSourceModifyAccuracyPriority: -1,
+		onSourceModifyAccuracy(accuracy) {
+			if (move.flags['punch']) {
+				if (typeof accuracy !== 'number') return;
+				this.debug('compoundeyes - enhancing accuracy');
+				return this.chainModify([5325, 4096]);
 			}
 		},
 		name: "Iron Fist",
-		rating: 3,
+		rating: 2.5,
 		num: 89,
 	},
 	justified: {
@@ -1892,10 +1897,11 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 	},
 	// Updated
 	keeneye: {
-		onModifyMove(move) {
-			if (typeof move.accuracy !== 'number') return;
+		onSourceModifyAccuracyPriority: -1,
+		onSourceModifyAccuracy(accuracy) {
+			if (typeof accuracy !== 'number') return;
 			this.debug('keeneye - enhancing accuracy');
-			move.accuracy *= 1.6;
+			return this.chainModify([6554, 4096]);
 		},
 		isBreakable: true,
 		name: "Keen Eye",
@@ -4570,6 +4576,29 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 		rating: 0,
 		num: 161,
 	},
+	// updated
+	ironsole: {
+		onBasePowerPriority: 23,
+		onBasePower(basePower, attacker, defender, move) {
+			if (move.flags['kick']) {
+				this.debug('Iron Sole boost');
+				// return this.chainModify([4915, 4096]);
+				return this.chainModify([5325, 4096]);
+			}
+		},
+		onSourceModifyAccuracyPriority: -1,
+		onSourceModifyAccuracy(accuracy) {
+			if (move.flags['kick']) {
+				if (typeof accuracy !== 'number') return;
+				this.debug('Iron Sole - enhancing accuracy');
+				return this.chainModify([5325, 4096]);
+			}
+		},
+		name: "Iron Sole",
+		rating: 2.5,
+		num: 300,
+	},
+	
 
 	// CAP
 	mountaineer: {
