@@ -1303,6 +1303,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		type: "Fire",
 		contestType: "Beautiful",
 	},
+	// updated
 	blazekick: {
 		num: 299,
 		accuracy: 90,
@@ -1311,7 +1312,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		name: "Blaze Kick",
 		pp: 10,
 		priority: 0,
-		flags: {contact: 1, protect: 1, mirror: 1},
+		flags: {contact: 1, protect: 1, mirror: 1, kick: 1},
 		critRatio: 2,
 		secondary: {
 			chance: 10,
@@ -3534,6 +3535,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		maxMove: {basePower: 140},
 		contestType: "Clever",
 	},
+	// Updated
 	doublekick: {
 		num: 24,
 		accuracy: 100,
@@ -3542,7 +3544,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		name: "Double Kick",
 		pp: 30,
 		priority: 0,
-		flags: {contact: 1, protect: 1, mirror: 1},
+		flags: {contact: 1, protect: 1, mirror: 1, kick: 1},
 		multihit: 2,
 		secondary: null,
 		target: "normal",
@@ -8390,6 +8392,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		type: "Ground",
 		contestType: "Tough",
 	},
+	// Updated
 	highjumpkick: {
 		num: 136,
 		accuracy: 90,
@@ -8398,7 +8401,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		name: "High Jump Kick",
 		pp: 10,
 		priority: 0,
-		flags: {contact: 1, protect: 1, mirror: 1, gravity: 1},
+		flags: {contact: 1, protect: 1, mirror: 1, gravity: 1, kick: 1},
 		hasCrashDamage: true,
 		onMoveFail(target, source, move) {
 			this.damage(source.baseMaxhp / 2, source, source, this.dex.conditions.get('High Jump Kick'));
@@ -9233,6 +9236,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		type: "Normal",
 		contestType: "Beautiful",
 	},
+	// updated
 	jumpkick: {
 		num: 26,
 		accuracy: 95,
@@ -9242,7 +9246,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		name: "Jump Kick",
 		pp: 10,
 		priority: 0,
-		flags: {contact: 1, protect: 1, mirror: 1, gravity: 1},
+		flags: {contact: 1, protect: 1, mirror: 1, gravity: 1, kick: 1},
 		hasCrashDamage: true,
 		onMoveFail(target, source, move) {
 			this.damage(source.baseMaxhp / 2, source, source, this.dex.conditions.get('Jump Kick'));
@@ -9836,6 +9840,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		zMove: {boost: {spe: 1}},
 		contestType: "Beautiful",
 	},
+	// updated
 	lowkick: {
 		num: 67,
 		accuracy: 100,
@@ -9863,7 +9868,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		name: "Low Kick",
 		pp: 20,
 		priority: 0,
-		flags: {contact: 1, protect: 1, mirror: 1},
+		flags: {contact: 1, protect: 1, mirror: 1, kick: 1},
 		onTryHit(target, pokemon, move) {
 			if (target.volatiles['dynamax']) {
 				this.add('-fail', pokemon, 'Dynamax');
@@ -10879,6 +10884,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		type: "Bug",
 		contestType: "Cool",
 	},
+	// updated
 	megakick: {
 		num: 25,
 		accuracy: 75,
@@ -10887,7 +10893,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		name: "Mega Kick",
 		pp: 5,
 		priority: 0,
-		flags: {contact: 1, protect: 1, mirror: 1},
+		flags: {contact: 1, protect: 1, mirror: 1, kick: 1},
 		secondary: null,
 		target: "normal",
 		type: "Normal",
@@ -14433,6 +14439,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		zMove: {boost: {spe: 1}},
 		contestType: "Cute",
 	},
+	// updated
 	rollingkick: {
 		num: 27,
 		accuracy: 85,
@@ -14442,7 +14449,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		name: "Rolling Kick",
 		pp: 15,
 		priority: 0,
-		flags: {contact: 1, protect: 1, mirror: 1},
+		flags: {contact: 1, protect: 1, mirror: 1, kick: 1},
 		secondary: {
 			chance: 30,
 			volatileStatus: 'flinch',
@@ -18288,6 +18295,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		type: "Electric",
 		contestType: "Cool",
 	},
+	// updated
 	thunderouskick: {
 		num: 823,
 		accuracy: 100,
@@ -18296,7 +18304,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		name: "Thunderous Kick",
 		pp: 10,
 		priority: 0,
-		flags: {contact: 1, protect: 1, mirror: 1},
+		flags: {contact: 1, protect: 1, mirror: 1, kick: 1},
 		secondary: {
 			chance: 100,
 			boosts: {
@@ -18672,6 +18680,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		zMove: {boost: {accuracy: 1}},
 		contestType: "Clever",
 	},
+	// updated
 	tripleaxel: {
 		num: 813,
 		accuracy: 90,
@@ -18683,7 +18692,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		name: "Triple Axel",
 		pp: 10,
 		priority: 0,
-		flags: {contact: 1, protect: 1, mirror: 1},
+		flags: {contact: 1, protect: 1, mirror: 1, kick: 1},
 		multihit: 3,
 		multiaccuracy: true,
 		secondary: null,
@@ -18704,7 +18713,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		name: "Triple Kick",
 		pp: 10,
 		priority: 0,
-		flags: {contact: 1, protect: 1, mirror: 1},
+		flags: {contact: 1, protect: 1, mirror: 1, kick: 1},
 		multihit: 3,
 		multiaccuracy: true,
 		secondary: null,
@@ -18714,6 +18723,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		maxMove: {basePower: 90},
 		contestType: "Cool",
 	},
+	// updated
 	tropkick: {
 		num: 688,
 		accuracy: 100,
@@ -18722,7 +18732,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		name: "Trop Kick",
 		pp: 15,
 		priority: 0,
-		flags: {contact: 1, protect: 1, mirror: 1},
+		flags: {contact: 1, protect: 1, mirror: 1, kick: 1},
 		secondary: {
 			chance: 100,
 			boosts: {
