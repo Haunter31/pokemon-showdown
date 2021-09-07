@@ -1873,14 +1873,14 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 				return this.chainModify([5325, 4096]);
 			}
 		},
-		onSourceModifyAccuracyPriority: -1,
+		/* onSourceModifyAccuracyPriority: -1,
 		onSourceModifyAccuracy(accuracy) {
 			if (move.flags['punch']) {
 				if (typeof accuracy !== 'number') return;
 				this.debug('compoundeyes - enhancing accuracy');
 				return this.chainModify([5325, 4096]);
 			}
-		},
+		}, */
 		name: "Iron Fist",
 		rating: 2.5,
 		num: 89,
@@ -4586,14 +4586,14 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 				return this.chainModify([5325, 4096]);
 			}
 		},
-		onSourceModifyAccuracyPriority: -1,
+		/* onSourceModifyAccuracyPriority: -1,
 		onSourceModifyAccuracy(accuracy) {
 			if (move.flags['kick']) {
 				if (typeof accuracy !== 'number') return;
 				this.debug('Iron Sole - enhancing accuracy');
 				return this.chainModify([5325, 4096]);
 			}
-		},
+		},*/
 		name: "Iron Sole",
 		rating: 2.5,
 		num: 300,
